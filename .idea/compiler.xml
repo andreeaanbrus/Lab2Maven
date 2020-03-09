@@ -9,5 +9,8 @@
         <module name="Lab2Maven" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Lab2Maven" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
