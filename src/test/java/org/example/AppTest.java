@@ -133,5 +133,18 @@ public class AppTest
         service.deleteStudent("1234");
     }
 
+    @Test
+    public void souldAddStudent() {
+        StudentXMLRepo studentXMLRepo = new StudentXMLRepo("fisiere/studentTest.xml");
+        Student student = new Student("12", "Andreea Anbrus", 931, "aiie2252@scs.ubbcluj.ro");
+        studentXMLRepo.save(student);
+        assertNotNull(studentXMLRepo.findOne("12"));
+    }
+
+    @Test
+    public void shouldNotAddStudent() {
+        assertEquals(false, false);
+    }
+
 
 }
