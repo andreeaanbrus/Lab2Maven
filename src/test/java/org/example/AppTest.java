@@ -34,14 +34,6 @@ public class AppTest
     NotaValidator notaValidator = new NotaValidator(studentXMLRepository, temaXMLRepository);
     NotaXMLRepo notaXMLRepository = new NotaXMLRepo(filenameNota);
     Service service = new Service(studentXMLRepository, studentValidator, temaXMLRepository, temaValidator, notaXMLRepository, notaValidator);
-    /**
-     * Rigorous Test :-)
-     */
-    @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
-    }
 
     @Test
     public void test_tc1_testStudentId() {
