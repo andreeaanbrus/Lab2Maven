@@ -159,9 +159,18 @@ public class AppTest
             assertEquals(e.getMessage(), "Numar tema invalid!");
         }
         assertEquals(((Collection<?>)service.getAllTeme()).size(), number);
-        assertEquals(true, true);
     }
 
-
+    @Test
+    public void test_tc2_testAssignmentDescription() {
+        Tema tema = new Tema("1265", "", 10, 21);
+        int number = ((Collection<?>)service.getAllTeme()).size();
+        try {
+            service.addTema(tema);
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "Descriere invalida!");
+        }
+        assertEquals(((Collection<?>)service.getAllTeme()).size(), number);
+    }
 
 }
