@@ -1,8 +1,11 @@
 package org.example;
 
 import domain.Student;
+import domain.Tema;
+import jdk.nashorn.internal.ir.Assignment;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.theories.internal.Assignments;
 import repository.NotaXMLRepo;
 import repository.StudentFileRepository;
 import repository.StudentXMLRepo;
@@ -145,6 +148,20 @@ public class AppTest
     public void shouldNotAddStudent() {
         assertEquals(false, false);
     }
+
+    @Test
+    public void test_tc1_testAssignmentID() {
+        Tema tema = new Tema("", "Description", 10, 21);
+        int number = ((Collection<?>)service.getAllTeme()).size();
+        try {
+            service.addTema(tema);
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "Numar tema invalid!");
+        }
+        assertEquals(((Collection<?>)service.getAllTeme()).size(), number);
+        assertEquals(true, true);
+    }
+
 
 
 }
