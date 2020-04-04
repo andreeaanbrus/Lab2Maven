@@ -11,6 +11,7 @@ public class TemaValidator implements Validator<Tema> {
      */
     @Override
     public void validate(Tema entity) throws ValidationException {
+//      See docs for equals  https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#equals(java.lang.Object)
         if(entity.getID().equals("") || entity.getID() == null) {
             throw new ValidationException("Numar tema invalid!");
         }

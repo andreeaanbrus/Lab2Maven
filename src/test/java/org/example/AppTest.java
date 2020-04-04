@@ -59,6 +59,7 @@ public class AppTest
         assertEquals(s1, student1);
         service.deleteStudent("1234");
     }
+//    todo different test cases
 
     @Test
     public void test_tc2_testStudentName() {
@@ -149,6 +150,7 @@ public class AppTest
         assertEquals(false, false);
     }
 
+    //    in class
     @Test
     public void test_tc1_testAssignmentID() {
         Tema tema = new Tema("", "Description", 10, 21);
@@ -163,7 +165,7 @@ public class AppTest
 
     @Test
     public void test_tc2_testAssignmentDescription() {
-        Tema tema = new Tema("1265", "", 10, 21);
+        Tema tema = new Tema("1265", "", 10, 12);
         int number = ((Collection<?>)service.getAllTeme()).size();
         try {
             service.addTema(tema);
@@ -172,5 +174,81 @@ public class AppTest
         }
         assertEquals(((Collection<?>)service.getAllTeme()).size(), number);
     }
+//    take home
+//    @Test
+//    public void test_tc3_testAssignmentIDNull() {
+//        Tema tema = new Tema(null, "Description", 10, 12);
+//        int number = ((Collection<?>)service.getAllTeme()).size();
+//        try {
+//            service.addTema(tema);
+//        } catch (Exception e) {
+//            assertEquals(e.getMessage(), "Numar tema invalid!");
+//        }
+//        assertEquals(((Collection<?>)service.getAllTeme()).size(), number);
+//    }
 
+    @Test
+    public void test_tc4_deadline() {
+        Tema tema = new Tema("12345", "Description", 0, 12);
+        int number = ((Collection<?>)service.getAllTeme()).size();
+        try {
+            service.addTema(tema);
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "Deadlineul trebuie sa fie intre 1-14.");
+        }
+        assertEquals(((Collection<?>)service.getAllTeme()).size(), number);
+    }
+
+    @Test
+    public void test_tc5_deadline() {
+        Tema tema = new Tema("12345", "Description", 15, 12);
+        int number = ((Collection<?>)service.getAllTeme()).size();
+        try {
+            service.addTema(tema);
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "Deadlineul trebuie sa fie intre 1-14.");
+        }
+        assertEquals(((Collection<?>)service.getAllTeme()).size(), number);
+    }
+
+    @Test
+    public void test_tc6_primire() {
+        Tema tema = new Tema("12345", "Description", 11, 0);
+        int number = ((Collection<?>)service.getAllTeme()).size();
+        try {
+            service.addTema(tema);
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "Saptamana primirii trebuie sa fie intre 1-14.");
+        }
+        assertEquals(((Collection<?>)service.getAllTeme()).size(), number);
+    }
+
+    @Test
+    public void test_tc7_primire() {
+        Tema tema = new Tema("12345", "Description", 11, 15);
+        int number = ((Collection<?>)service.getAllTeme()).size();
+        try {
+            service.addTema(tema);
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "Saptamana primirii trebuie sa fie intre 1-14.");
+        }
+        assertEquals(((Collection<?>)service.getAllTeme()).size(), number);
+    }
+
+    @Test
+    public void test_tc8_primire() {
+        Tema tema = null;
+        int number = ((Collection<?>)service.getAllTeme()).size();
+        service.addTema(tema);
+        assertEquals(((Collection<?>)service.getAllTeme()).size(), number + 1);
+    }
+
+    @Test
+    public void test_tc9_primire() {
+        Tema tema = new Tema("123", "Description", 11, 12);
+        int number = ((Collection<?>)service.getAllTeme()).size();
+        service.addTema(tema);
+        assertEquals(((Collection<?>)service.getAllTeme()).size(), number + 1);
+        service.deleteTema("123");
+    }
 }
