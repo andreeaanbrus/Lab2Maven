@@ -239,8 +239,12 @@ public class AppTest
     public void test_tc8_primire() {
         Tema tema = null;
         int number = ((Collection<?>)service.getAllTeme()).size();
-        service.addTema(tema);
-        assertEquals(((Collection<?>)service.getAllTeme()).size(), number + 1);
+        try {
+            service.addTema(tema);
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "Entity is null");
+        }
+        assertEquals(((Collection<?>)service.getAllTeme()).size(), number);
     }
 
     @Test
