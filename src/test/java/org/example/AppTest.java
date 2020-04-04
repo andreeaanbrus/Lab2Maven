@@ -175,17 +175,17 @@ public class AppTest
         assertEquals(((Collection<?>)service.getAllTeme()).size(), number);
     }
 //    take home
-//    @Test
-//    public void test_tc3_testAssignmentIDNull() {
-//        Tema tema = new Tema(null, "Description", 10, 12);
-//        int number = ((Collection<?>)service.getAllTeme()).size();
-//        try {
-//            service.addTema(tema);
-//        } catch (Exception e) {
-//            assertEquals(e.getMessage(), "Numar tema invalid!");
-//        }
-//        assertEquals(((Collection<?>)service.getAllTeme()).size(), number);
-//    }
+    @Test
+    public void test_tc3_testAssignmentIDNull() {
+        Tema tema = new Tema(null, "Description", 10, 12);
+        int number = ((Collection<?>)service.getAllTeme()).size();
+        try {
+            service.addTema(tema);
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "Numar tema invalid!");
+        }
+        assertEquals(((Collection<?>)service.getAllTeme()).size(), number);
+    }
 
     @Test
     public void test_tc4_deadline() {
