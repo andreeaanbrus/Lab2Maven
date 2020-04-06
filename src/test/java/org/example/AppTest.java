@@ -1,5 +1,6 @@
 package org.example;
 
+import domain.Nota;
 import domain.Student;
 import domain.Tema;
 import jdk.nashorn.internal.ir.Assignment;
@@ -11,10 +12,12 @@ import repository.StudentFileRepository;
 import repository.StudentXMLRepo;
 import repository.TemaXMLRepo;
 import service.Service;
+import sun.util.resources.LocaleData;
 import validation.NotaValidator;
 import validation.StudentValidator;
 import validation.TemaValidator;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 import static org.junit.Assert.*;
@@ -254,5 +257,34 @@ public class AppTest
         service.addTema(tema);
         assertEquals(((Collection<?>)service.getAllTeme()).size(), number + 1);
         service.deleteTema("123");
+    }
+
+    @Test
+    public void test_tc10_addGrade() {
+        Nota nota = new Nota("123", "12", "1", 10, LocalDate.of(2019, 4, 27));
+        int number = ((Collection<?>)service.getAllNote()).size();
+        service.addNota(nota, "Some feedback");
+        assertEquals(((Collection<?>)service.getAllNote()).size(), number + 1);
+        service.deleteNota("123");
+    }
+
+    @Test
+    public void test_big_bang() {
+        int numberStudent = ((Collection<?>)service.getAllStudenti()).size();
+        int numberAssignments = ((Collection<?>)service.getAllTeme()).size();
+        int numberGrades = ((Collection<?>)service.getAllNote()).size();
+        Student student = new Student("432", "Andreea", 9, "email");
+        Tema tema = new Tema("435", "Tema", 12, 1);
+        Nota nota = new Nota("432", "432", "435", 10, LocalDate.of(2020, 4, 27));
+        service.addStudent(student);
+        service.addTema(tema);
+        service.addNota(nota, "new one");
+        assertEquals(((Collection<?>)service.getAllStudenti()).size(), numberStudent + 1);
+        assertEquals(((Collection<?>)service.getAllNote()).size(), numberGrades + 1);
+        assertEquals(((Collection<?>)service.getAllTeme()).size(), numberAssignments + 1);
+        service.deleteTema("435");
+        service.deleteStudent("432");
+        service.deleteNota("432");
+
     }
 }
