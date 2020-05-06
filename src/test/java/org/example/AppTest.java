@@ -4,6 +4,7 @@ import domain.Nota;
 import domain.Student;
 import domain.Tema;
 import org.junit.Test;
+import org.junit.experimental.theories.internal.Assignments;
 import repository.NotaXMLRepo;
 import repository.StudentFileRepository;
 import repository.StudentXMLRepo;
@@ -281,6 +282,47 @@ public class AppTest
         service.deleteTema("435");
         service.deleteStudent("432");
         service.deleteNota("432");
+    }
 
+    @Test
+    public void test_incremental_addStudent() {
+        Student student1 = new Student("1234", "Andreea", 931, "some email");
+        service.addStudent(student1);
+        Student s1 = service.findStudent("1234");
+        assertEquals(s1, student1);
+        service.deleteStudent("1234");
+    }
+
+    @Test
+    public void test_incremental_addAssignment() {
+        Student student1 = new Student("1234", "Andreea", 931, "some email");
+        Tema tema = new Tema("435", "Tema", 12, 1);
+        service.addStudent(student1);
+        service.addTema(tema);
+        Student s1 = service.findStudent("1234");
+        Tema t1 = service.findTema("435");
+        assertEquals(s1, student1);
+        assertEquals(tema, t1);
+        service.deleteStudent("1234");
+        service.deleteTema("435");
+    }
+
+    @Test
+    public void test_incremental_AddGrade() {
+        Student student = new Student("1234", "Andreea", 931, "some email");
+        Tema tema = new Tema("435", "Tema", 12, 1);
+        Nota nota = new Nota("432", "1234", "435", 10, LocalDate.of(2020, 4, 27));
+        service.addStudent(student);
+        service.addTema(tema);
+        service.addNota(nota, "some feedback");
+        Student s1 = service.findStudent("1234");
+        Tema t1 = service.findTema("435");
+        Nota n1 = service.findNota("432");
+        assertEquals(s1, student);
+        assertEquals(tema, t1);
+        assertEquals(nota, n1);
+        service.deleteStudent("1234");
+        service.deleteTema("435");
+        service.deleteNota("432");
     }
 }
